@@ -30,7 +30,10 @@ wsServer.on('request', function(request) {
   var connection = request.accept('whitehead-protocol', request.origin);
   connection.player_id = next_id;
   next_id++;
+<<<<<<< HEAD
   add_player(connection.player_id);
+=======
+>>>>>>> 3d3eb223aec92ef549fc2a016a14b9447b7972f6
   console.log((new Date()) + ' Connection accepted. Id = '+ connection.player_id);
 
   // handle messages from the client
@@ -65,6 +68,7 @@ const GAME_PLAY_ATTACK = 4;
 const GAME_END = 5;
 
 var gamestate = {
+<<<<<<< HEAD
 	territories: [
 		{
 			name: "East Africa",
@@ -427,7 +431,7 @@ function cash_in(input) {
 
 }
 
-// if it is the players turn, and it is time to attack, rol the dice, and do the stuff
+// if it is the players turn, and it is time to attack, roll the dice, and do the stuff
 function attack(input) {
 
 }
