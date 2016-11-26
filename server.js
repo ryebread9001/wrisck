@@ -42,13 +42,13 @@ wsServer.on('request', function(request) {
     // send an update to everyone, if there is one
     for (conn of wsServer.connections) {
       update = make_update(conn.player_id);
-      conn.sendUTF(update);
+      conn.sendUTF(JSON.stringify(update));
     }
   });
 
   // handle disconnect
   connection.on('close', function(reasonCode, description) {
-    console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+    console.log((new Date()) + ' Peer ' + connection.player_id + ' disconnected.');
   });
 });
 
@@ -57,18 +57,19 @@ wsServer.on('request', function(request) {
 // Game Code
 // Game states
 const GAME_JOIN = 0;
-const GAME_SETUP = 1;
-const GAME_PLAY_ADD = 2;
-const GAME_PLAY_ATTACK = 3;
-const GAME_PLAY_REPOSITION = 4;
-const GAME_END = 5;
+const GAME_SETUP_CLAIM = 1;
+const GAME_SETUP_ADD = 2;
+const GAME_PLAY_ADD = 3;
+const GAME_PLAY_ATTACK = 4;
+const GAME_PLAY_REPOSITION = 5;
+const GAME_END = 6;
 
 var gamestate = {
   territories = [],
   players = [],
   player_turn = -1,
   state = GAME_JOIN,
-  card_bonus = 
+  card_bonus = 6, // CHECK THIS
 };
 
 // Handle the messages
@@ -97,6 +98,9 @@ function handle_command(input) {
       break;
     case "reposition":
       reposition(input);
+      break;
+    case "end_turn":
+      end_turn(input);
       break;
   }
   // update turn and game state
@@ -146,5 +150,10 @@ function attack(input) {
 
 // checks if there is a connection, and if it is the time to reposition, and stuff
 function reposition(input) {
+
+}
+
+// checks if it is the users turn, and changes the gamestate to advance to the next user on update_turn
+function end_turn(input) {
 
 }
