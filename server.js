@@ -61,15 +61,14 @@ const GAME_SETUP_CLAIM = 1;
 const GAME_SETUP_ADD = 2;
 const GAME_PLAY_ADD = 3;
 const GAME_PLAY_ATTACK = 4;
-const GAME_PLAY_REPOSITION = 5;
-const GAME_END = 6;
+const GAME_END = 5;
 
 var gamestate = {
-  territories = [],
-  players = [],
-  player_turn = -1,
-  state = GAME_JOIN,
-  card_bonus = 6, // CHECK THIS
+	territories: [],
+	players: [],
+	player_turn: -1,
+	state: GAME_JOIN,
+	card_bonus: 6, // CHECK THIS
 };
 
 // Handle the messages
